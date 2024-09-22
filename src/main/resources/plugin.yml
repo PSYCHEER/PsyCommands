@@ -1,0 +1,7 @@
+name: PsyCommands
+version: '1.0-SNAPSHOT'
+main: eu.psycheer.psyCommands.PsyCommands
+api-version: '1.21'
+prefix: PsyCommands
+load: STARTUP
+authors: [ PSYCHEER ]
