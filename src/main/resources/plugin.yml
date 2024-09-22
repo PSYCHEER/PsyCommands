@@ -4,4 +4,8 @@ main: eu.psycheer.psyCommands.PsyCommands
 api-version: '1.21'
 prefix: PsyCommands
 load: STARTUP
+depend:
+  - Vault
+softdepend:
+  - LuckPerms
 authors: [ PSYCHEER ]
