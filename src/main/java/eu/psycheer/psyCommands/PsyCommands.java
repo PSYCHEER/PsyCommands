@@ -1,5 +1,6 @@
 package eu.psycheer.psyCommands;
 
+import eu.psycheer.psyCommands.events.PlayerUpdatePlayerList;
 import eu.psycheer.psyCommands.events.PlayerMessage;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -30,6 +31,7 @@ public final class PsyCommands extends JavaPlugin {
             this.getServer().getPluginManager().disablePlugin(this);
         }else{
             this.getLogger().warning("Hooked into Chat " + chat +" API!");
+            //new PlayerUpdatePlayerList(this, chat);
             new PlayerMessage(this, chat);
             this.getLogger().warning("PsyCommands successfully enabled!");
         }
