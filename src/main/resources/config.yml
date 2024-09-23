@@ -1,0 +1,9 @@
+Messages:
+  enabled: true
+  format: '%PREFIX%%PLAYER%%SUFFIX% >>'
+  join-message: '%PLAYER% joined the server!'
+
+Colors:
+  # Permission that player needs for using colors in chat
+  # Only MiniMessage is supported ex. <gold><bold>TEXT</gold></bold> <#FFAA00>SAMPLE</#FFAA00>
+  chatcolor-permission-suffix: 'colors'

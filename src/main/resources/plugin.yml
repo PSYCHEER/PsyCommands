@@ -1,8 +1,8 @@
-name: PsyCommands
+name: PsyMessagement
 version: '1.0-SNAPSHOT'
-main: eu.psycheer.psyCommands.PsyCommands
+main: eu.psycheer.psyMessagement.PsyMessagement
 api-version: '1.21'
-prefix: PsyCommands
+prefix: PsyMessagement
 load: STARTUP
 depend:
   - Vault

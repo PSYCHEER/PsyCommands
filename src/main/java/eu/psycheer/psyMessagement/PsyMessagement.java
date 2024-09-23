@@ -1,14 +1,14 @@
-package eu.psycheer.psyCommands;
+package eu.psycheer.psyMessagement;
 
-import eu.psycheer.psyCommands.events.PlayerUpdatePlayerList;
-import eu.psycheer.psyCommands.events.PlayerMessage;
+import eu.psycheer.psyMessagement.events.PlayerJoin;
+import eu.psycheer.psyMessagement.events.PlayerMessage;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
-public final class PsyCommands extends JavaPlugin {
+public final class PsyMessagement extends JavaPlugin {
 
     public Chat chat = null;
     public File dataFile;
@@ -19,27 +19,35 @@ public final class PsyCommands extends JavaPlugin {
             this.getServer().getPluginManager().disablePlugin(this);
         }
 
-        if(this.getDataFolder().exists()){
-            return;
-        }else{
-            //this.dataFile = new File(this.getDataFolder(), saveDefaultConfig());
-        }
-
+        loadConfig();
         setupChat();
+
         if(!setupChat() || chat == null){
             this.getLogger().severe(String.format("[%s] - Disabled because no Vault was found!", getDescription().getName()));
             this.getServer().getPluginManager().disablePlugin(this);
-        }else{
+        }
+        else{
             this.getLogger().warning("Hooked into Chat " + chat +" API!");
             //new PlayerUpdatePlayerList(this, chat);
             new PlayerMessage(this, chat);
-            this.getLogger().warning("PsyCommands successfully enabled!");
+            this.getLogger().warning("PsyMessagement successfully enabled!");
         }
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+    }
+
+    void loadConfig(){
+        if(this.getDataFolder().exists()){
+            this.getLogger().warning("Plugin folder exists!");
+            new ConfigReader(this);
+        }else{
+            this.getLogger().severe("Creating plugin folder");
+            saveDefaultConfig();
+            new ConfigReader(this);
+        }
     }
 
     private boolean setupChat() {

@@ -1,9 +1,8 @@
-package eu.psycheer.psyCommands.events;
+package eu.psycheer.psyMessagement.events;
 
-import eu.psycheer.psyCommands.PsyCommands;
+import eu.psycheer.psyMessagement.PsyMessagement;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -15,27 +14,22 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.text.MessageFormat;
-
 public class PlayerMessage implements Listener {
     public Chat messageConstructor;
-    public final PsyCommands plugin;
+    public final PsyMessagement plugin;
     public Audience audience = Audience.audience((Audience) Bukkit.getServer());
+    public String permissionsColors;
 
-    public PlayerMessage(PsyCommands plugin, Chat chat){
+    private final String colorPerm;
+
+    public PlayerMessage(PsyMessagement plugin, Chat chat){
         this.plugin = plugin;
         messageConstructor = chat;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getLogger().warning("PlayerMessage event is listening...");
-    }
-
-    public String Decorated(String message){
-        return null;
-    }
-
-    @EventHandler
-    private void AddAudience(PlayerJoinEvent e){
-
+        permissionsColors = plugin.getConfig().getString("Colors.chatcolor-permission-suffix");
+        colorPerm = "PsyMessagement." + permissionsColors;
+        new PlayerJoin(plugin, chat, this);
     }
 
     @EventHandler (priority = EventPriority.LOWEST)
@@ -44,14 +38,23 @@ public class PlayerMessage implements Listener {
         String playerName = e.getPlayer().getName();
         String prefix = messageConstructor.getPlayerPrefix(player);
         String suffix = messageConstructor.getPlayerSuffix(player);
-        String displayName = prefix + playerName + suffix;
         String custom = " >> ";
-        String content = PlainTextComponentSerializer.plainText().serialize(e.message());
-        String format = displayName + custom + content;
-        plugin.getLogger().warning(format);
-        //plugin.getLogger().warning(e.message().toString());
-        TextComponent parsed = (TextComponent) MiniMessage.miniMessage().deserialize(format);
-        audience.sendMessage(parsed);
-        e.setCancelled(true);
+        String content = PlainTextComponentSerializer.plainText().serialize(e.originalMessage());
+        String displayName = prefix + playerName + suffix;
+
+        if(e.getPlayer().hasPermission(colorPerm)){
+            String format = displayName + custom + content;
+            TextComponent parsed = (TextComponent) MiniMessage.miniMessage().deserialize(format);
+            audience.sendMessage(parsed);
+            e.setCancelled(true);
+        }
+        else{
+            content = content.replace("<", "");
+            content = content.replace(">", "");
+            String format = displayName + custom + content;
+            TextComponent parsed = (TextComponent) MiniMessage.miniMessage().deserialize(format);
+            audience.sendMessage(parsed);
+            e.setCancelled(true);
+        }
     }
 }
