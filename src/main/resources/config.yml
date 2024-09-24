@@ -1,9 +1,26 @@
 Messages:
-  enabled: true
-  format: '%PREFIX%%PLAYER%%SUFFIX% >>'
-  join-message: '%PLAYER% joined the server!'
+  # Format of join message
+  # Supports MiniMessage color codes
+  # Currently supported placeholders are:
+  # %PREFIX% - Prefix of Player accessed via Vault
+  # %PLAYER% - Name of the player - unchanged
+  # %DISPLAY_NAME% - Display name of the player (with prefix and suffix if stated)
+  # %SUFFIX% - Suffix of player accessed via Vault
+  join-message: '%PREFIX%%PLAYER% <gold>joined the <bold>server</bold>!</gold>'
+  # Format of chat
+  # Supports MiniMessage color codes
+  # Currently supported placeholders are:
+  # %PREFIX% - Prefix of Player accessed via Vault
+  # %PLAYER% - Name of the player - unchanged
+  # %DISPLAY_NAME% - Display name of the player (with prefix and suffix if stated)
+  # %SUFFIX% - Suffix of player accessed via Vault
+  # %CUSTOM% - Custom player and message divider provided via `custom` field
+  # %MESSAGE% - Message placeholder - have to be always present!
+  format: '%PREFIX%%PLAYER%%SUFFIX% %CUSTOM% %MESSAGE%'
+  custom: '>>'
 
 Colors:
   # Permission that player needs for using colors in chat
   # Only MiniMessage is supported ex. <gold><bold>TEXT</gold></bold> <#FFAA00>SAMPLE</#FFAA00>
+  # Restart needed
   chatcolor-permission-suffix: 'colors'
