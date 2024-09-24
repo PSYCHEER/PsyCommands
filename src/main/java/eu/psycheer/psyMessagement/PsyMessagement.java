@@ -18,13 +18,13 @@ public final class PsyMessagement extends JavaPlugin {
         loadConfig(false);
 
         if(!setupChat() || chat == null){
-            this.getLogger().severe(String.format("§4[%s] - Disabled because no Vault was found!", getDescription().getName()));
+            this.getLogger().severe(String.format("[%s] - Disabled because no Vault was found!", getDescription().getName()));
             this.getServer().getPluginManager().disablePlugin(this);
         }
         else{
-            this.getLogger().warning("§aHooked into Chat " + chat.getName() +" API!");
+            this.getLogger().warning("Hooked into Chat " + chat.getName() +" API!");
             new PlayerMessage(this, chat);
-            this.getLogger().warning("§aSuccessfully enabled!");
+            this.getLogger().warning("Successfully enabled!");
         }
     }
 
@@ -36,10 +36,10 @@ public final class PsyMessagement extends JavaPlugin {
 
     public void loadConfig(boolean reload){
         if(this.getDataFolder().exists()){
-            this.getLogger().warning("§aPlugin folder exists!");
+            this.getLogger().warning("Plugin folder exists!");
             getConfig();
         }else{
-            this.getLogger().severe("§aCreating plugin folder");
+            this.getLogger().severe("Creating plugin folder");
             saveDefaultConfig();
             getConfig();
         }
@@ -49,12 +49,12 @@ public final class PsyMessagement extends JavaPlugin {
             cr = new ConfigReader(this);
             cr.load(getConfig());
             cr.loadPerms(getConfig());
-            getLogger().warning("Loaded");
+            //getLogger().warning("Loaded");
         }
         else{
             reloadConfig();
             cr.load(getConfig());
-            getLogger().warning("Reloaded");
+            //getLogger().warning("Reloaded");
         }
     }
 

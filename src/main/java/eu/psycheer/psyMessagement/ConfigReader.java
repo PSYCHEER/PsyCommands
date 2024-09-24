@@ -25,7 +25,7 @@ public class ConfigReader {
         format = config.getString("Messages.format");
         //plugin.getLogger().warning(joinMessage);
         //plugin.getLogger().warning(permissionsColors);
-        plugin.getLogger().info(custom);
+        //plugin.getLogger().info(custom);
         //plugin.getLogger().warning(format);
     }
 
