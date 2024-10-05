@@ -10,6 +10,7 @@ public class ConfigReader {
     public String custom = null;
     public String format = null;
     public String joinMessage = null;
+    public String leaveMessage = null;
     public FileConfiguration config;
 
     public ConfigReader(PsyMessagement plugin) {
@@ -21,6 +22,7 @@ public class ConfigReader {
         this.config = config;
 
         joinMessage = config.getString("Messages.join-message");
+        leaveMessage = config.getString("Messages.leave-message");
         custom = config.getString("Messages.custom");
         format = config.getString("Messages.format");
         //plugin.getLogger().warning(joinMessage);

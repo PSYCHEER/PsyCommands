@@ -1,5 +1,5 @@
 Messages:
-  # Format of join message
+  # Format of join/leave message
   # Supports MiniMessage color codes
   # Currently supported placeholders are:
   # %PREFIX% - Prefix of Player accessed via Vault
@@ -7,6 +7,7 @@ Messages:
   # %DISPLAY_NAME% - Display name of the player (with prefix and suffix if stated)
   # %SUFFIX% - Suffix of player accessed via Vault
   join-message: '%PREFIX%%PLAYER% <gold>joined the <bold>server</bold>!</gold>'
+  leave-message: '%PREFIX%%PLAYER% <red>left the <bold>server</bold>!</red>'
   # Format of chat
   # Supports MiniMessage color codes
   # Currently supported placeholders are:
@@ -24,3 +25,5 @@ Colors:
   # Only MiniMessage is supported ex. <gold><bold>TEXT</gold></bold> <#FFAA00>SAMPLE</#FFAA00>
   # Restart needed
   chatcolor-permission-suffix: 'colors'
+
+Version: '1.0.2'
