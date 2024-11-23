@@ -6,11 +6,17 @@ import org.bstats.bukkit.Metrics;
 import eu.psycheer.psyMessagement.commands.commands;
 import eu.psycheer.psyMessagement.events.PlayerMessage;
 import net.milkbowl.vault.chat.Chat;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.function.Consumer;
 
 
 public final class PsyMessagement extends JavaPlugin {
@@ -18,11 +24,21 @@ public final class PsyMessagement extends JavaPlugin {
     public Chat chat = null;
     public ConfigReader cr;
     int bstatsID = 23879;
+    int pluginID = 119788;
     PlayerMessage pm = null;
     boolean debug;
 
     @Override
     public void onEnable() {
+        new UpdateChecker(this, pluginID).getVersion(version -> {
+            if (this.getPluginMeta().getVersion().equals(version)) {
+                getLogger().info("There is not a new update available.");
+            } else {
+                getLogger().warning("There is a new update available: " + version);
+                getLogger().warning("https://www.spigotmc.org/resources/psymessagement.119788/");
+            }
+        });
+
         Metrics metrics = new Metrics(this, bstatsID);
         update();
         setupChat();
