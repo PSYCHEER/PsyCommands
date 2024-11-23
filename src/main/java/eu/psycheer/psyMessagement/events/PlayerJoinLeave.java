@@ -4,7 +4,6 @@ import eu.psycheer.psyMessagement.PsyMessagement;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 
-public class PlayerJoin implements Listener {
+public class PlayerJoinLeave implements Listener {
 
     public Chat messageConstructor;
     public final PsyMessagement plugin;
@@ -22,7 +21,7 @@ public class PlayerJoin implements Listener {
     private String joinMessage;
     private String leftMessage;
 
-    public PlayerJoin(PsyMessagement plugin, Chat chat, PlayerMessage pm){
+    public PlayerJoinLeave(PsyMessagement plugin, Chat chat, PlayerMessage pm){
         //Boolean join = (Boolean) plugin.getConfig().getString("Messages.enabled");
         this.plugin = plugin;
         this.pm = pm;
@@ -42,13 +41,13 @@ public class PlayerJoin implements Listener {
         String displayName = prefix + playerName + suffix;
 
         if(joinMessage != null){
-            e.setJoinMessage(null);
             joinMessage = joinMessage.replace("%DISPLAY_NAME%", displayName);
             joinMessage = joinMessage.replace("%PREFIX%", prefix);
             joinMessage = joinMessage.replace("%SUFFIX%", suffix);
             joinMessage = joinMessage.replace("%PLAYER%", e.getPlayer().getName());
             TextComponent content = (TextComponent) MiniMessage.miniMessage().deserialize(joinMessage);
-            send(content);
+            //send(content);
+            e.joinMessage(content);
         }
     }
 
@@ -61,13 +60,13 @@ public class PlayerJoin implements Listener {
         String displayName = prefix + playerName + suffix;
 
         if(leftMessage != null){
-            e.setQuitMessage(null);
             leftMessage = leftMessage.replace("%DISPLAY_NAME%", displayName);
             leftMessage = leftMessage.replace("%PREFIX%", prefix);
             leftMessage = leftMessage.replace("%SUFFIX%", suffix);
             leftMessage = leftMessage.replace("%PLAYER%", e.getPlayer().getName());
             TextComponent content = (TextComponent) MiniMessage.miniMessage().deserialize(leftMessage);
-            send(content);
+            //send(content);
+            e.quitMessage(content);
         }
     }
 

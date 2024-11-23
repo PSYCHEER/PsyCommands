@@ -17,7 +17,7 @@ public class ConfigReader {
         this.plugin = plugin;
     }
 
-    public void load(FileConfiguration config){
+    public void load(FileConfiguration config, boolean debug){
 
         this.config = config;
 
@@ -25,10 +25,13 @@ public class ConfigReader {
         leaveMessage = config.getString("Messages.leave-message");
         custom = config.getString("Messages.custom");
         format = config.getString("Messages.format");
-        //plugin.getLogger().warning(joinMessage);
-        //plugin.getLogger().warning(permissionsColors);
-        //plugin.getLogger().info(custom);
-        //plugin.getLogger().warning(format);
+        if(debug)
+        {
+            plugin.getLogger().warning(joinMessage);
+            plugin.getLogger().warning(permissionsColors);
+            plugin.getLogger().info(custom);
+            plugin.getLogger().warning(format);
+        }
     }
 
     public void loadPerms(FileConfiguration config){

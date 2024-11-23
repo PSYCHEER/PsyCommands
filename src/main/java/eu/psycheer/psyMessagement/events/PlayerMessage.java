@@ -1,6 +1,5 @@
 package eu.psycheer.psyMessagement.events;
 
-import eu.psycheer.psyMessagement.ConfigReader;
 import eu.psycheer.psyMessagement.PsyMessagement;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.audience.Audience;
@@ -13,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerMessage implements Listener {
     public Chat messageConstructor;
@@ -28,7 +25,7 @@ public class PlayerMessage implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
         plugin.getLogger().warning("PlayerMessage event is listening...");
         permissionsColors = "PsyMessagement." + plugin.cr.permissionsColors;
-        new PlayerJoin(plugin, chat, this);
+        new PlayerJoinLeave(plugin, chat, this);
     }
 
     @EventHandler (priority = EventPriority.LOWEST)

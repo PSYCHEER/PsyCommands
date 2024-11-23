@@ -26,4 +26,6 @@ Colors:
   # Restart needed
   chatcolor-permission-suffix: 'colors'
 
-Version: '1.0.2'
+
+debug: false
+Version: '1.0.3'
