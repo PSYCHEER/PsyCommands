@@ -46,8 +46,10 @@ public class PlayerJoinLeave implements Listener {
             joinMessage = joinMessage.replace("%SUFFIX%", suffix);
             joinMessage = joinMessage.replace("%PLAYER%", e.getPlayer().getName());
             TextComponent content = (TextComponent) MiniMessage.miniMessage().deserialize(joinMessage);
-            //send(content);
             e.joinMessage(content);
+        }
+        else{
+            plugin.getLogger().severe("You don't have set up a join message!");
         }
     }
 
@@ -65,8 +67,10 @@ public class PlayerJoinLeave implements Listener {
             leftMessage = leftMessage.replace("%SUFFIX%", suffix);
             leftMessage = leftMessage.replace("%PLAYER%", e.getPlayer().getName());
             TextComponent content = (TextComponent) MiniMessage.miniMessage().deserialize(leftMessage);
-            //send(content);
             e.quitMessage(content);
+        }
+        else{
+            plugin.getLogger().severe("You don't have set up a leave message!");
         }
     }
 

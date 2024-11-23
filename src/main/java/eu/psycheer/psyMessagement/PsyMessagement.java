@@ -1,5 +1,6 @@
 package eu.psycheer.psyMessagement;
 
+import eu.psycheer.psyMessagement.events.PlayerJoinLeave;
 import org.bstats.bukkit.Metrics;
 
 import eu.psycheer.psyMessagement.commands.commands;
@@ -17,11 +18,11 @@ public final class PsyMessagement extends JavaPlugin {
     public Chat chat = null;
     public ConfigReader cr;
     int bstatsID = 23879;
+    PlayerMessage pm = null;
     boolean debug;
 
     @Override
     public void onEnable() {
-
         Metrics metrics = new Metrics(this, bstatsID);
         update();
         setupChat();
@@ -68,14 +69,14 @@ public final class PsyMessagement extends JavaPlugin {
             cr = new ConfigReader(this);
             cr.load(getConfig(), debug);
             cr.loadPerms(getConfig());
-            new PlayerMessage(this, chat);
+            pm = new PlayerMessage(this, chat);
             if(debug)
                 getLogger().warning("Loaded");
         }
         else{
             reloadConfig();
             cr.load(getConfig(), debug);
-            new PlayerMessage(this, chat);
+            new PlayerJoinLeave(this, chat, pm);
             if(debug)
                 getLogger().warning("Reloaded");
         }
