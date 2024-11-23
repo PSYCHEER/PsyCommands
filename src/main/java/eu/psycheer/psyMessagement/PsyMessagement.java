@@ -34,8 +34,7 @@ public final class PsyMessagement extends JavaPlugin {
             this.getServer().getPluginManager().disablePlugin(this);
         }
         else{
-            this.getLogger().warning("Hooked into Chat " + chat.getName() +" API!");
-            new PlayerMessage(this, chat);
+            this.getLogger().warning("Hooked into Chat " + chat.getName());
             this.getLogger().warning("Successfully enabled!");
         }
     }
@@ -69,12 +68,16 @@ public final class PsyMessagement extends JavaPlugin {
             cr = new ConfigReader(this);
             cr.load(getConfig(), debug);
             cr.loadPerms(getConfig());
-            //getLogger().warning("Loaded");
+            new PlayerMessage(this, chat);
+            if(debug)
+                getLogger().warning("Loaded");
         }
         else{
             reloadConfig();
             cr.load(getConfig(), debug);
-            //getLogger().warning("Reloaded");
+            new PlayerMessage(this, chat);
+            if(debug)
+                getLogger().warning("Reloaded");
         }
     }
 

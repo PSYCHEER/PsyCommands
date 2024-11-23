@@ -28,6 +28,7 @@ public class ConfigReader {
         if(debug)
         {
             plugin.getLogger().warning(joinMessage);
+            plugin.getLogger().warning(leaveMessage);
             plugin.getLogger().warning(permissionsColors);
             plugin.getLogger().info(custom);
             plugin.getLogger().warning(format);

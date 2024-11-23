@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.w3c.dom.Text;
 
 public class PlayerMessage implements Listener {
     public Chat messageConstructor;
@@ -37,6 +38,7 @@ public class PlayerMessage implements Listener {
         String content = PlainTextComponentSerializer.plainText().serialize(e.originalMessage());
         String custom = plugin.cr.custom;
         String displayName = prefix + playerName + suffix;
+        TextComponent dName = (TextComponent) MiniMessage.miniMessage().deserialize(displayName);
         String format = plugin.cr.format;
         format = format.replace("%DISPLAY_NAME%", displayName);
         format = format.replace("%PREFIX%", prefix);
