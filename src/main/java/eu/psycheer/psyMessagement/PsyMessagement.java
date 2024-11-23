@@ -30,14 +30,7 @@ public final class PsyMessagement extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        new UpdateChecker(this, pluginID).getVersion(version -> {
-            if (this.getPluginMeta().getVersion().equals(version)) {
-                getLogger().info("There is not a new update available.");
-            } else {
-                getLogger().warning("There is a new update available: " + version);
-                getLogger().warning("https://www.spigotmc.org/resources/psymessagement.119788/");
-            }
-        });
+        new UpdateChecker(this).getVersionNew(pluginID);
 
         Metrics metrics = new Metrics(this, bstatsID);
         update();
