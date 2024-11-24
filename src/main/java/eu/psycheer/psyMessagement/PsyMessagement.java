@@ -33,7 +33,6 @@ public final class PsyMessagement extends JavaPlugin {
         new UpdateChecker(this).getVersionNew(pluginID);
 
         Metrics metrics = new Metrics(this, bstatsID);
-        update();
         setupChat();
         setupCommands();
         loadConfig(false);
@@ -65,9 +64,10 @@ public final class PsyMessagement extends JavaPlugin {
                 if(!config.exists())
                 {
                     this.getLogger().warning("No config found!");
-                    saveDefaultConfig();
                     getConfig();
+                    saveDefaultConfig();
                 }
+                update();
             }
             else{
                 this.getLogger().info("Creating plugin folder!");
